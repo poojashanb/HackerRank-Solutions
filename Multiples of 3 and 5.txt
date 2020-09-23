@@ -1,0 +1,41 @@
+Problem - 1
+
+Description : 	If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3,5,6 and 9. The sum of these multiples is 23.
+				Find the sum of all the multiples of 3 or 5 below N.
+				
+				For N=10, if we list all the natural numbers below 100 that are multiples of 3 or 5, we get 3,5,6 and 9. The sum of these multiples is 23.
+				Similarly for N=100, we get 2318 .
+
+Sample Input :	2
+				10
+				100
+				Input format :
+				First line contains T that denotes the number of test cases. This is followed by T lines, each containing an integer, N .
+
+Expected O/p :	23
+				2318
+				
+Solution :
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        long t = in.nextInt();
+        long three,five,fifteen =0;
+        for(int a0 = 0; a0 < t; a0++){
+            long n = in.nextInt();
+            three = (n-1)/3;
+            five = (n-1)/5;
+            fifteen = (n-1)/15;
+            long total = 3*(three*(three+1)/2)+5*(five*(five+1)/2)-15*(fifteen*(fifteen+1)/2);
+            System.out.println(total);
+        }
+    }
+}
