@@ -1,0 +1,42 @@
+
+Description : 	We use the integers a,b and n to create the following series:
+					(a+2*0 x b)+(a+2*1 x b)+...=(a+2*(n-1) x b)
+				You are given q queries in the form of ,a,b and n. For each query, print the series corresponding to the given ,a ,b and n values as a single line of n space-separated integers.
+				
+				if a=5,b=2 and n=3
+				S(0)= 5+pow(2,0)*b;
+				S(1)= 5+pow(2,0)*b + pow(2,1)*b;
+				... and so on till n=9;
+				
+Sample Input :	2
+				0 2 10
+				5 3 5
+				Input format :
+				The first line contains an integer, q, denoting the number of queries.
+				Each line i of the q subsequent lines contains three space-separated integers describing the respective ,a(i) ,b(i) and n(i) values for that query.
+Expected O/p :	2 6 14 30 62 126 254 510 1022 2046
+				8 14 26 50 98
+				
+Solution :
+import java.util.*;
+import java.io.*;
+import java.lang.Math;
+class Solution{
+    public static void main(String []argh){
+        Scanner in = new Scanner(System.in);
+        int t=in.nextInt();
+        for(int i=0;i<t;i++){
+            int a = in.nextInt();
+            int b = in.nextInt();
+            int n = in.nextInt();
+            int c=a;
+            for(int j=0;j<n;j++){
+                c =c+ (int)Math.pow(2,j) * b;
+                System.out.print(c +" ");
+                
+            }
+            System.out.println();
+        }
+        in.close();
+    }
+}

@@ -1,0 +1,47 @@
+Description : 	If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3,5,6 and 9. The sum of these multiples is 23.
+				Find the sum of all the multiples of 3 or 5 below N.
+				
+				For N=10, if we list all the natural numbers below 100 that are multiples of 3 or 5, we get 3,5,6 and 9. The sum of these multiples is 23.
+				Similarly for N=100, we get 2318 .
+
+				In each line of output there should be two columns:
+				The first column contains the String and is left justified using exactly 15 characters.
+				The second column contains the integer, expressed in exactly 3 digits; if the original input has less than three digits, you must pad your output's leading digits with zeroes.
+
+Sample Input :	java 100
+				cpp 65
+				python 50
+				Input format :
+				Every line of input will contain a String followed by an integer.
+				Each String will have a maximum of 15 alphabetic characters, and each integer will be in the inclusive range from 1 to 999.
+
+Expected O/p :	===========================
+				java          100
+				cpp           065
+				python        050
+				===========================
+				
+Solution :
+
+import java.util.Scanner;
+
+public class Solution {
+
+    public static void main(String[] args) {
+            Scanner sc=new Scanner(System.in);
+            System.out.println("================================");
+            for(int i=0;i<3;i++){
+                String s1=sc.next();
+                int x=sc.nextInt();
+                if(x<100){
+                    System.out.printf("%-14s %03d",s1,x).println();;	//14 is the Width. From left, including the string value after 15 characters next column (integer val) will be printed 
+                }else{
+                System.out.printf("%-14s %d",s1,x).println();
+                }            
+            }
+            System.out.println("================================");
+
+    }
+}
+
+// Output formatting with padding - %03d ->if integer is less than 100, then pads zeroes in the beginning of integer number.
