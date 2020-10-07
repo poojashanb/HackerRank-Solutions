@@ -1,0 +1,58 @@
+Description :	Staircase detail
+				This is a staircase of size : n=4
+				   #
+			      ##
+                 ###
+                ####
+				Its base and height are both equal to n. It is drawn using # symbols and spaces. 
+				The last line is not preceded by any spaces.
+				Write a program that prints a staircase of size n.
+				The staircase is right-aligned, composed of # symbols and spaces, and has a height and width of n.
+
+Sample Input :	6
+				Input Format : A single integer, n, denoting the size of the staircase.
+				
+Sample Output :	     #
+                    ##
+                   ###
+                  ####
+                 #####
+                ######
+
+Solution :	
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the staircase function below.
+    static void staircase(int n) {
+        StringBuilder buildString = new StringBuilder();
+        int j=0;
+
+        for(int i=0;i<n;i++){
+            buildString.append(" ");
+        }
+        for(int i=1;i<=n;i++){
+            buildString.replace(buildString.length()-i,buildString.length()-j,"#");
+            j++;
+            System.out.println(buildString);
+        }
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int n = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        staircase(n);
+
+        scanner.close();
+    }
+}
