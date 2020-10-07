@@ -1,0 +1,83 @@
+Description :	A video player plays a game in which the character competes in a hurdle race. Hurdles are of varying heights, 
+				and the characters have a maximum height they can jump. There is a magic potion they can take that will increase their 
+				maximum jump height by 1 unit for each dose. How many doses of the potion must the character take to be able to jump 
+				all of the hurdles. If the character can already clear all of the hurdles, return 0.
+				
+				Example
+				height=[1,2,3,3,2]
+				k=1
+				The character can jump 1 unit high initially and must take 3-1=2 doses of potion to be able to jump all of the hurdles.
+				
+				Function Description :
+				Complete the hurdleRace function in the editor below.
+				hurdleRace has the following parameter(s):
+					int k: the height the character can jump naturally
+					int height[n]: the heights of each hurdle
+					
+				Returns :
+				int: the minimum number of doses required, always 0 or more.
+				
+				For more explanation check - https://www.hackerrank.com/challenges/the-hurdle-race/problem
+				
+Sample Input :	5 4
+				1 6 3 5 2
+
+Sample Output :	2
+
+Solution :
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the hurdleRace function below.
+    static int hurdleRace(int k, int[] height) {
+        int max = 0;
+        for(int i=0;i<height.length;i++){
+            if(height[i]>max)					//find max height value from given array of heights
+                max = height[i];
+        }
+        if(max>k){								//if max height value is greater than k, find absolute difference of max and k 
+        int jump = Math.abs(max-k);
+        return jump;							
+        }
+        return 0;								//else return 0
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] nk = scanner.nextLine().split(" ");
+
+        int n = Integer.parseInt(nk[0]);
+
+        int k = Integer.parseInt(nk[1]);
+
+        int[] height = new int[n];
+
+        String[] heightItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < n; i++) {
+            int heightItem = Integer.parseInt(heightItems[i]);
+            height[i] = heightItem;
+        }
+
+        int result = hurdleRace(k, height);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
