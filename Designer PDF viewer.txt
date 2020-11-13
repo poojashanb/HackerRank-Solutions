@@ -1,0 +1,108 @@
+Description: 	When a contiguous block of text is selected in a PDF viewer, the selection is highlighted with a blue rectangle. 
+				In this PDF viewer, each word is highlighted independently. 
+				
+				For example: Check the Designer PDF viewer.png
+				
+				There is a list of 26 character heights aligned by index to their letters. For example, 
+				'a' is at index 0 and 'z' is at index 25. There will also be a string. Using the letter heights given, 
+				determine the area of the rectangle highlight in mm2(square) assuming all letters are  wide.
+				
+				Example:
+				h=[1,3,1,3,1,4,1,3,2,5,5,5,5,1,1,5,5,1,5,2,5,5,5,5,5,5] = 'torn'
+				The heights are t=2 and o=1, r=1,n=1. The tallest letter is 2 high and there are 4 letters. 
+				The hightlighted area will be 2*4=8mm(square) so the answer is 8.
+				
+				Function Description:
+				Complete the designerPdfViewer function in the editor below.
+				designerPdfViewer has the following parameter(s):
+				- int h[26]: the heights of each letter			
+				- string word: a string
+				Returns:
+				- int: the size of the highlighted area
+				
+				Input Format:
+				The first line contains 26 space-separated integers describing the respective heights of each 
+				consecutive lowercase English letter, ascii[a-z].
+				The second line contains a single word consisting of lowercase English alphabetic letters.
+				
+Sample Input:	1 3 1 3 1 4 1 3 2 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+				abc
+
+Sample Output:	9
+
+				Explanation:
+				We are highlighting the word abc:
+				Letter heights are a=1,b=3  and c=1. The tallest letter, b, is 3mm high. The selection area for 
+				this word is 3*1mm*3mm = 9.
+
+Solution:
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the designerPdfViewer function below.
+    static int designerPdfViewer(int[] h, String word) {
+		// assign all 26 alphabets as elements in char array
+        char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        
+		//create map that will point each character from alphabet[] to numbers of h[]
+        Map<Character,Integer> letters = new HashMap<>();
+        for(int i=0;i<alphabet.length;i++){
+            char ch = alphabet[i];
+            int temp = h[i];
+            letters.put(ch,temp);
+        }
+        
+		//Get values of letters in word. And store them in maxEle[]
+        int[] maxEle = new int[word.length()];
+        for(int j=0;j<word.length();j++){
+            char ch1 =word.charAt(j);
+            if(letters.containsKey(ch1))
+                maxEle[j]= letters.get(ch1);
+        }
+        int max=0;
+		//find out the maximum value of maxEle[].
+        for(int k=0;k<maxEle.length;k++){
+            if(maxEle[k]>max)
+                max = maxEle[k];
+        }
+		
+		//multiply this max value with the number of letters in word, this is the required result.
+        int result = max*word.length();
+        return result;
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int[] h = new int[26];
+
+        String[] hItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < 26; i++) {
+            int hItem = Integer.parseInt(hItems[i]);
+            h[i] = hItem;
+        }
+
+        String word = scanner.nextLine();
+
+        int result = designerPdfViewer(h, word);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
